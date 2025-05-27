@@ -113,4 +113,4 @@ Topic-based notes and reflections: what I learned, struggled with, or plan to re
 ## ✨ About
 
 I'm a fullstack developer expanding my backend skill set through Ruby and Rails.  
-This repository is my living log and learning playground — built publicly, iteratively, and for the long term.
+This repository is my living log and learning playground, built publicly, iteratively, and for the long term.

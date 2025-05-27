@@ -84,6 +84,57 @@ Topic-based notes and study logs, organized by day (`day1.md`, `day2.md`, ...).
 
 ---
 
+## ⚙️ Project CLI helper (`exe`)
+
+To streamline working with Exercism Ruby exercises, this project includes a simple **CLI helper script** named `exe` (located in the project root).
+
+### What does `exe` do?
+
+- **Simplifies running tests** — instead of writing the full `ruby -r minitest/pride path/to/test_file.rb`,  
+  you can just run:
+
+  ```bash
+  ./exe test lasagna
+  ```
+
+  This automatically runs the test file located at `exercism/ruby/lasagna/lasagna_test.rb`.
+
+- **Simplifies submitting solutions** — instead of writing the full `exercism submit path/to/solution.rb`,  
+  you can just run:
+
+  ```bash
+  ./exe submit lasagna
+  ```
+
+  This automatically submits the implementation file `exercism/ruby/lasagna/lasagna.rb`.
+
+### Why did I create it?
+
+Because I'm lazy 😄 instead of typing long commands over and over, I made this little CLI helper to save time and keystrokes.
+
+### How does it work?
+
+- The script uses the exercise name (e.g. `lasagna`) to build paths to the test and implementation files inside the `exercism/ruby` directory.
+- It then runs the appropriate command (`ruby` for tests, `exercism submit` for submission) with those paths.
+- You can also pass additional arguments if needed.
+
+### Usage examples
+
+```bash
+./exe test lasagna
+./exe submit lasagna
+./exe test reverse-string
+./exe submit reverse-string
+```
+
+---
+
+### Note for Windows users
+
+This script is a bash shell script and works out of the box in environments like Git Bash or WSL on Windows.
+
+---
+
 ## 🧪 Completed Exercises
 
 - ✅ [Try Ruby](https://try.ruby-lang.org/)

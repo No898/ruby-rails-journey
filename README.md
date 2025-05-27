@@ -1,7 +1,9 @@
 # 🛤 Ruby & Rails Journey
 
-This repository documents my personal learning journey with Ruby and Ruby on Rails.  
-My goal is to gain a solid understanding of both the language and the framework — through practical projects, notes, and gradual exploration of the ecosystem.
+This repository documents my personal learning journey with **Ruby** and **Ruby on Rails**.  
+My goal is to gain a solid understanding of both the language and the framework — through small projects, real exercises, and gradual, consistent practice.
+
+I treat this as a **public playground**, portfolio piece, and study log — everything I learn is tracked here.
 
 ---
 
@@ -71,11 +73,27 @@ My goal is to gain a solid understanding of both the language and the framework 
 ### `/ruby-cli`
 Small Ruby command-line projects built to practice the language.
 
+### `/exercism/ruby`
+All Ruby track exercises from Exercism, solved sequentially with test coverage and progressive difficulty.
+
 ### `/rails`
-Full Rails web applications following the MVC architecture.
+Rails applications using MVC structure, built during exploration.
 
 ### `/notes`
-Topic-based notes and reflections: what I learned, struggled with, or plan to revisit.
+Topic-based notes and study logs, organized by day (`day1.md`, `day2.md`, ...).
+
+---
+
+## 🧪 Completed Exercises
+
+- ✅ [Try Ruby](https://try.ruby-lang.org/)
+- ✅ Exercism:
+  - [x] hello-world
+  - [x] lasagna
+  - [x] amusement-park (attendee)
+  - [x] reverse-string
+
+(More to come...)
 
 ---
 
@@ -83,34 +101,20 @@ Topic-based notes and reflections: what I learned, struggled with, or plan to re
 
 ### 🧠 Ruby
 
-- [Try Ruby (try.ruby-lang.org)](https://try.ruby-lang.org/)  
-  An interactive, browser-based playground to learn Ruby basics without installation.
-
-- [The Odin Project – Ruby Path](https://www.theodinproject.com/paths/full-stack-ruby-on-rails)  
-  A complete beginner-to-intermediate curriculum covering Ruby and Rails.
-
-- [Pry – Ruby REPL and debugging console](https://github.com/pry/pry)  
-  A powerful alternative to IRB for debugging and interacting with Ruby code in real time.
-
-- [Ruby Koans](http://rubykoans.com/)  
-  Interactive exercises to learn Ruby syntax, TDD, and idiomatic thinking.
-
-- [Exercism – Ruby Track](https://exercism.org/tracks/ruby)  
-  Free coding exercises with mentoring and feedback.
-
----
+- [Try Ruby (try.ruby-lang.org)](https://try.ruby-lang.org/)
+- [The Odin Project – Ruby Path](https://www.theodinproject.com/paths/full-stack-ruby-on-rails)
+- [Pry – Ruby REPL and debugging console](https://github.com/pry/pry)
+- [Ruby Koans](http://rubykoans.com/)
+- [Exercism – Ruby Track](https://exercism.org/tracks/ruby)
 
 ### 🚂 Ruby on Rails
 
-- [Ruby on Rails Guides](https://guides.rubyonrails.org/)  
-  Official documentation — everything from Rails basics to advanced topics like Active Record, testing, and deployment.
-
-- [Rails Girls Guides](https://guides.railsgirls.com/)  
-  Beginner-friendly tutorials to create real Rails apps, ideal for quick onboarding.
+- [Ruby on Rails Guides](https://guides.rubyonrails.org/)
+- [Rails Girls Guides](https://guides.railsgirls.com/)
 
 ---
 
 ## ✨ About
 
-I'm a fullstack developer expanding my backend skill set through Ruby and Rails.  
-This repository is my living log and learning playground, built publicly, iteratively, and for the long term.
+I'm a fullstack developer expanding my backend and Ruby skill set through real-world practice.  
+This repo is my public learning log and technical growth tracker built one day, one lesson at a time.

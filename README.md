@@ -7,19 +7,92 @@ I treat this as a **public playground**, portfolio piece, and study log — ever
 
 ---
 
+## ⚙️ Project CLI Helper (`exe.rb`)
+
+To streamline working with Exercism Ruby exercises, this project includes a simple **interactive CLI helper script** named `exe.rb` (located in the project root).
+
+### What does `exe.rb` do?
+
+- **Interactive testing and submission** — You can run tests or submit solutions for any exercise by simply selecting options in the terminal, without typing long paths or filenames.
+- **Automatic path discovery** — The script will list all available exercises and valid files, so you always select the right one.
+- **Cross-platform** — Works out of the box on Windows, Mac, and Linux (requires only Ruby).
+
+### How does it work?
+
+1. Run the script in your terminal:
+    ```bash
+    ruby exe.rb
+    ```
+
+2. Choose your action:
+    - `test` — run the exercise's test file
+    - `submit` — submit your solution to Exercism
+
+3. Select the exercise folder  
+   You get a menu of all available exercises.
+
+4. Select the file  
+   The script lists relevant Ruby files for the chosen action:
+   - For `test`, it lists all `*_test.rb` files.
+   - For `submit`, it lists all `.rb` files except tests.
+
+5. The script runs or submits your selection and prints output or Exercism URL.
+
+### Why did I create it?
+
+Because I'm lazy 😄, instead of typing long commands or guessing file paths, I wrote this helper to save time and avoid mistakes.
+
+### Example usage
+
+```bash
+ruby exe.rb
+```
+
+Sample session:
+```
+Choose action:
+1) test
+2) submit
+> 1
+
+Choose folder:
+1) lasagna
+2) reverse-string
+...
+
+Choose file:
+1) lasagna_test.rb
+...
+
+Running: ruby -r minitest/pride exercism/ruby/lasagna/lasagna_test.rb
+...
+```
+
+### Note for Windows users
+
+This script is a plain Ruby script and works anywhere Ruby does — including Windows (CMD, PowerShell, Git Bash, or WSL).  
+No Bash or extra libraries needed.
+
+### Requirements
+
+- Ruby installed (any recent version is fine)
+- [Exercism CLI](https://exercism.org/docs/using/cli) installed and authenticated (for `submit` command)
+
+---
+
 ## 🎯 Learning Objectives
 
 ### 🧠 Ruby (The Language)
 
 #### ✅ 1. Fundamentals
-- [X] Data types: `Integer`, `Float`, `String`, `Symbol`, `Boolean`, `NilClass`
-- [X] Variables: local, global, instance (`@`), class (`@@`)
-- [X] Conditionals: `if`, `elsif`, `else`, `unless`, ternary operator
-- [X] Loops: `while`, `until`, `for`, `loop`, `each`
-- [X] Methods: definition, parameters, return values
-- [X] Blocks: `do..end`, `{}` syntax
-- [X] Arrays and Hashes: CRUD, iteration
-- [X] String manipulation: `split`, `gsub`, `interpolation`, `upcase`, etc.
+- [x] Data types: `Integer`, `Float`, `String`, `Symbol`, `Boolean`, `NilClass`
+- [x] Variables: local, global, instance (`@`), class (`@@`)
+- [x] Conditionals: `if`, `elsif`, `else`, `unless`, ternary operator
+- [x] Loops: `while`, `until`, `for`, `loop`, `each`
+- [x] Methods: definition, parameters, return values
+- [x] Blocks: `do..end`, `{}` syntax
+- [x] Arrays and Hashes: CRUD, iteration
+- [x] String manipulation: `split`, `gsub`, `interpolation`, `upcase`, etc.
 - [ ] File handling: `File.read`, `File.write`, working with `JSON` and `CSV`
 - [ ] Exception handling: `begin`, `rescue`, `ensure`
 - [ ] `require`, `load`, working with gems
@@ -49,6 +122,7 @@ I treat this as a **public playground**, portfolio piece, and study log — ever
 ---
 
 ### 🚂 Ruby on Rails (The Framework)
+
 - [ ] Project structure and Rails conventions
 - [ ] MVC architecture (Model–View–Controller)
 - [ ] Generators and scaffolding
@@ -81,57 +155,6 @@ Rails applications using MVC structure, built during exploration.
 
 ### `/notes`
 Topic-based notes and study logs, organized by day (`day1.md`, `day2.md`, ...).
-
----
-
-## ⚙️ Project CLI helper (`exe`)
-
-To streamline working with Exercism Ruby exercises, this project includes a simple **CLI helper script** named `exe` (located in the project root).
-
-### What does `exe` do?
-
-- **Simplifies running tests** — instead of writing the full `ruby -r minitest/pride path/to/test_file.rb`,  
-  you can just run:
-
-  ```bash
-  ./exe test lasagna
-  ```
-
-  This automatically runs the test file located at `exercism/ruby/lasagna/lasagna_test.rb`.
-
-- **Simplifies submitting solutions** — instead of writing the full `exercism submit path/to/solution.rb`,  
-  you can just run:
-
-  ```bash
-  ./exe submit lasagna
-  ```
-
-  This automatically submits the implementation file `exercism/ruby/lasagna/lasagna.rb`.
-
-### Why did I create it?
-
-Because I'm lazy 😄 instead of typing long commands over and over, I made this little CLI helper to save time and keystrokes.
-
-### How does it work?
-
-- The script uses the exercise name (e.g. `lasagna`) to build paths to the test and implementation files inside the `exercism/ruby` directory.
-- It then runs the appropriate command (`ruby` for tests, `exercism submit` for submission) with those paths.
-- You can also pass additional arguments if needed.
-
-### Usage examples
-
-```bash
-./exe test lasagna
-./exe submit lasagna
-./exe test reverse-string
-./exe submit reverse-string
-```
-
----
-
-### Note for Windows users
-
-This script is a bash shell script and works out of the box in environments like Git Bash or WSL on Windows.
 
 ---
 

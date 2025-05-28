@@ -1,7 +1,13 @@
+# Root .env
+.env
+
+# .env files in any subdirectory
+**/.env
+
+# Existing ignores
 /log/*
 /tmp/*
 /db/*.sqlite3
 /db/*.sqlite3-journal
 /public/system/*
 /node_modules
-/.env

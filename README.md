@@ -118,11 +118,11 @@ No Bash or extra libraries needed.
 
 #### 🧪 3. Practical Extras
 
-* [ ] Gemfile & Bundler: `bundle init`, `bundle install`, `bundle exec`
+* [x] Gemfile & Bundler: `bundle init`, `bundle install`, `bundle exec`
 * [ ] Debugging: `puts`, `p`, `irb`, `pry`, `byebug`
 * [ ] Testing: `Minitest` basics (optionally `RSpec`)
 * [x] CLI scripting: `ARGV`, `OptionParser`
-* [ ] Using environment variables: `ENV['SOME_KEY']`
+* [x] Using environment variables: `ENV['SOME_KEY']`
 * [ ] Documentation tools: `ri`, `yard`, [rubydoc.info](https://rubydoc.info)
 * [ ] (Optional) Writing your own gem
 
@@ -160,6 +160,11 @@ Small Ruby command-line projects built to practice the language.
 A fully functional command-line To-Do app written in Ruby. Tasks are stored in a JSON file for persistence.
 Supports: `add`, `list`, `done`, `remove`, `clear`. Automatically saves changes.
 
+### `/ruby-cli/ai-terminal`
+
+A simple Ruby terminal chatbot that connects to OpenRouter’s LLM APIs (e.g. Gemini 2.0 Flash, DeepSeek) using HTTP requests and environment variables.  
+Designed to explore how to work with APIs, handle `.env`, and build interactive CLI tools in pure Ruby.
+
 ### `/exercism/ruby`
 
 All Ruby track exercises from Exercism, solved sequentially with test coverage and progressive difficulty.
@@ -191,6 +196,7 @@ Topic-based notes and study logs, organized by day (`day1.md`, `day2.md`, ...).
   * [x] two-fer
   * [x] acronym
   * [x] isogram
+  * [x] word-count
 
 (More to come...)
 
@@ -200,6 +206,8 @@ Topic-based notes and study logs, organized by day (`day1.md`, `day2.md`, ...).
 
 ### 🧠 Ruby
 
+
+* [Ruby package repository](https://rubygems.org/)
 * [Ruby Documentation](https://ruby-doc.org/3.4.1/index.html)
 * [Try Ruby (try.ruby-lang.org)](https://try.ruby-lang.org/)
 * [The Odin Project – Ruby Path](https://www.theodinproject.com/paths/full-stack-ruby-on-rails)

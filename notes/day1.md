@@ -16,4 +16,3 @@
 - Ruby syntax feels natural and fun
 - Loved how flexible everything feels (especially strings and methods)
 - Blocks make sense, but I want to go deeper into `yield` and closures
-

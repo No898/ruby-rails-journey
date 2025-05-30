@@ -1,0 +1,37 @@
+<% content_for :title, "Showing contact" %>
+
+<div class="md:w-2/3 w-full">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+  <h1 class="font-bold text-4xl">Showing contact</h1>
+
+  <%= render @contact %>
+
+  <%= link_to "Edit this contact", edit_contact_path(@contact), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 text-gray-800 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-yellow-300 inline-block font-medium transition-colors duration-200" %>
+  <%= link_to "Back to contacts", contacts_path, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 text-gray-800 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-yellow-300 inline-block font-medium transition-colors duration-200" %>
+  <%= button_to "Destroy this contact", @contact, method: :delete, form_class: "sm:inline-block mt-2 sm:mt-0 sm:ml-2", class: "w-full rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 dark:bg-red-700 dark:hover:bg-red-800 font-medium cursor-pointer transition-colors duration-200", data: { turbo_confirm: "Are you sure?" } %>
+
+  <hr class="my-6" />
+
+<h2 class="text-xl font-bold mb-3">Notes</h2>
+
+<% @notes.each do |note| %>
+  <div class="mb-4 border-l-4 border-blue-400 pl-3 py-2 bg-blue-50">
+    <p><%= note.content %></p>
+    <p class="text-sm text-gray-500"><%= note.created_at.strftime("%d.%m.%Y %H:%M") %></p>
+
+    <div class="mt-2">
+      <%= link_to "Edit", edit_note_path(note), class: "text-blue-600 hover:underline text-sm" %>
+      <%= button_to "Delete", note_path(note), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "text-red-600 text-sm bg-transparent hover:underline" %>
+
+    </div>
+  </div>
+<% end %>
+
+<h3 class="text-lg font-semibold mt-6">Add a note</h3j>
+
+<%= render "notes/form", note: @note %>
+
+</div>

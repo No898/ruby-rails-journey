@@ -1,0 +1,23 @@
+<div id="<%= dom_id contact %>" class="w-full sm:w-auto my-5 space-y-5">
+  <div>
+    <strong class="block font-medium mb-1">Name:</strong>
+    <%= contact.name %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Email:</strong>
+    <%= contact.email %>
+  </div>
+
+  <div>
+    <strong class="block font-medium mb-1">Birthday:</strong>
+    <%= contact.birthday.strftime("%d.%m.%Y") if contact.birthday.present? %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Phone:</strong>
+    <%= contact.phone %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Company:</strong>
+    <%= contact.company %>
+  </div>
+</div>

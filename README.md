@@ -99,8 +99,8 @@ No Bash or extra libraries needed.
 * [x] Arrays and Hashes: CRUD, iteration
 * [x] String manipulation: `split`, `gsub`, `interpolation`, `upcase`, etc.
 * [x] File handling: `File.read`, `File.write`, working with `JSON` and `CSV`
-* [ ] Exception handling: `begin`, `rescue`, `ensure`
-* [ ] `require`, `load`, working with gems
+* [x] Exception handling: `begin`, `rescue`, `ensure`
+* [x] `require`, `load`, working with gems
 
 #### 🧱 2. OOP & Idiomatic Ruby
 
@@ -112,8 +112,8 @@ No Bash or extra libraries needed.
 * [ ] `yield`, `block_given?`, `Proc`, `lambda`, closures
 * [ ] Enumerable module: `map`, `select`, `reject`, `reduce`, etc.
 * [x] Symbols vs Strings — performance and semantics
-* [ ] Time and Date classes: `Time.now`, `Date.today`
-* [ ] Regular expressions: `/pattern/`, `match?`, `scan`, `gsub`
+* [x] Time and Date classes: `Time.now`, `Date.today`
+* [x] Regular expressions: `/pattern/`, `match?`, `scan`, `gsub`
 * [ ] Standard library: `OpenStruct`, `Struct`, `Set`, etc.
 
 #### 🧪 3. Practical Extras
@@ -130,13 +130,13 @@ No Bash or extra libraries needed.
 
 ### 🚂 Ruby on Rails (The Framework)
 
-* [ ] Project structure and Rails conventions
-* [ ] MVC architecture (Model–View–Controller)
-* [ ] Generators and scaffolding
-* [ ] Routing and RESTful resources
-* [ ] CRUD with Active Record
+* [x] Project structure and Rails conventions
+* [x] MVC architecture (Model–View–Controller)
+* [x] Generators and scaffolding
+* [x] Routing and RESTful resources
+* [x] CRUD with Active Record
 * [ ] Model validations and constraints
-* [ ] Working with forms (`form_with`, strong params)
+* [x] Working with forms (`form_with`, strong params)
 * [ ] Custom views, layouts, and partials
 * [ ] Flash messages and sessions
 * [ ] Manual user authentication (no Devise)
@@ -197,6 +197,7 @@ Topic-based notes and study logs, organized by day (`day1.md`, `day2.md`, ...).
   * [x] acronym
   * [x] isogram
   * [x] word-count
+  * [x] simple-calculator
 
 (More to come...)
 
@@ -217,6 +218,7 @@ Topic-based notes and study logs, organized by day (`day1.md`, `day2.md`, ...).
 
 ### 🚂 Ruby on Rails
 
+* [Ruby on Rails Official channel](https://www.youtube.com/watch?v=X_Hw9P1iZfQ)
 * [Ruby on Rails Guides](https://guides.rubyonrails.org/)
 * [Rails Girls Guides](https://guides.railsgirls.com/)
 

@@ -1,19 +1,40 @@
-# Root .env
+# 🌱 Environment files
 .env
-
-# .env files in any subdirectory
 **/.env
+/rails/mini_crm/.env
+/rails/mini_crm/.env.*
 
-# Existing ignores
-/log/*
-/tmp/*
-/db/*.sqlite3
-/db/*.sqlite3-journal
-/public/system/*
-/node_modules
+# 📁 Database
+/rails/mini_crm/db/*.sqlite3
+/rails/mini_crm/db/*.sqlite3-journal
 
+# 🧪 Logs & Temp
+/rails/mini_crm/log/*
+!/rails/mini_crm/log/.keep
+/rails/mini_crm/tmp/*
+!/rails/mini_crm/tmp/.keep
+
+# 🔧 Local bundler path
+/vendor/bundle
+
+# 🧰 Rails subproject (mini_crm) specific
 /rails/mini_crm/.bundle/
 /rails/mini_crm/tmp/*
 /rails/mini_crm/log/*
-/rails/mini_crm/vendor/bundle/*
+/rails/mini_crm/vendor/bundle/
+/rails/mini_crm/storage/*
+!/rails/mini_crm/storage/.keep
+/rails/mini_crm/node_modules/
+/rails/mini_crm/public/assets/
+/rails/mini_crm/public/packs/
 /rails/mini_crm/Gemfile.lock
+
+# 🧠 Editor/IDE
+*.swp
+*.swo
+.idea/
+.vscode/
+.DS_Store
+
+# 🐞 Debug
+.byebug_history

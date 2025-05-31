@@ -12,6 +12,8 @@
 /public/system/*
 /node_modules
 
-
+/rails/mini_crm/.bundle/
 /rails/mini_crm/tmp/*
-/rails/mini_crm/log
+/rails/mini_crm/log/*
+/rails/mini_crm/vendor/bundle/*
+/rails/mini_crm/Gemfile.lock

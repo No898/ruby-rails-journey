@@ -11,3 +11,7 @@
 /db/*.sqlite3-journal
 /public/system/*
 /node_modules
+
+
+/rails/mini_crm/tmp/*
+/rails/mini_crm/log

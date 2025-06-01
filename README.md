@@ -106,11 +106,11 @@ No Bash or extra libraries needed.
 
 * [x] Classes and objects, constructors (`initialize`), `self`
 * [x] `attr_accessor`, `attr_reader`, `attr_writer`
-* [ ] Inheritance (`<`) and calling `super`
+* [x] Inheritance (`<`) and calling `super`
 * [ ] Modules: `module`, `include`, `extend`
 * [ ] Method introspection: `respond_to?`, `send`, `method_missing`
 * [ ] `yield`, `block_given?`, `Proc`, `lambda`, closures
-* [ ] Enumerable module: `map`, `select`, `reject`, `reduce`, etc.
+* [x] Enumerable module: `map`, `select`, `reject`, `reduce`, etc.
 * [x] Symbols vs Strings — performance and semantics
 * [x] Time and Date classes: `Time.now`, `Date.today`
 * [x] Regular expressions: `/pattern/`, `match?`, `scan`, `gsub`
@@ -137,14 +137,14 @@ No Bash or extra libraries needed.
 * [x] CRUD with Active Record
 * [ ] Model validations and constraints
 * [x] Working with forms (`form_with`, strong params)
-* [ ] Custom views, layouts, and partials
-* [ ] Flash messages and sessions
+* [x] Custom views, layouts, and partials
+* [x] Flash messages and sessions
 * [ ] Manual user authentication (no Devise)
-* [ ] Nested resources and associations (`has_many`, `belongs_to`)
-* [ ] Database migrations and schema design
+* [x] Nested resources and associations (`has_many`, `belongs_to`)
+* [x] Database migrations and schema design
 * [ ] Testing basics (Minitest or RSpec)
-* [ ] Environment configs and secrets
-* [ ] Git project structure and .gitignore best practices
+* [x] Environment configs and secrets
+* [x] Git project structure and .gitignore best practices
 * [ ] (Optional) Deployment to Render / Fly.io / Railway
 
 ---
@@ -171,7 +171,9 @@ All Ruby track exercises from Exercism, solved sequentially with test coverage a
 
 ### `/rails`
 
-Rails applications using MVC structure, built during exploration.
+Rails applications using MVC structure, built during exploration.  
+Includes a mini CRM with contact management, note-taking, and theme support.  
+ViewComponent is used to create reusable buttons and flash message components.
 
 ### `/notes`
 
@@ -198,6 +200,8 @@ Topic-based notes and study logs, organized by day (`day1.md`, `day2.md`, ...).
   * [x] isogram
   * [x] word-count
   * [x] simple-calculator
+  * [x] chess-game
+  * [x] luhn
 
 (More to come...)
 
@@ -206,7 +210,6 @@ Topic-based notes and study logs, organized by day (`day1.md`, `day2.md`, ...).
 ## 📚 Resources I'm Using
 
 ### 🧠 Ruby
-
 
 * [Ruby package repository](https://rubygems.org/)
 * [Ruby Documentation](https://ruby-doc.org/3.4.1/index.html)

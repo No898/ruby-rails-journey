@@ -1,0 +1,15 @@
+# feat(dayX): short summary of feature or change
+#
+# Longer explanation of what was added or improved.
+#
+# - Bullet 1
+# - Bullet 2 (if needed)
+#
+# docs: update README or documentation
+# chore: update config or non-app logic
+# fix: bug fix
+# refactor: code restructuring without behavior change
+#
+# Examples:
+# feat(day7): add Devise authentication and UI polish
+# docs: update README with day7 progress

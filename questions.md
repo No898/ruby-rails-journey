@@ -10,10 +10,10 @@
 - How do you handle real-time features? (e.g., ActionCable, Hotwire, Stimulus)
 - What databases or tools do you use? (PostgreSQL, Redis, Elasticsearch…)
 - Do you use GraphQL or REST APIs?
+- What authentication system do you use? Do you use **Devise**, **OmniAuth**, or both?
 - What deployment methods do you use? (Heroku, Fly.io, Railway, custom?)
-- What a CI/CD pipeline do you use? 
+- What CI/CD pipeline do you use? 
 - What kind of testing do you use? (Minitest, RSpec)
-
 ---
 
 ## 🔧 Development Workflow

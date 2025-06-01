@@ -13,12 +13,17 @@
 
   <div class="mb-4">
     <%= form_with url: contacts_path, method: :get, local: true do |form| %>
-      <div class="flex mt-5 gap-2">
-        <%= form.text_field :q, placeholder: "Search contacts...", class: "border rounded px-3 py-2 w-[50%] lg:w-[20%] dark:bg-gray-700 dark:text-white dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400" %>
-        <%= render ButtonComponent.new(text: "Search", type: :submit) %>
+      <div class="flex gap-2 mt-5 flex-wrap">
+        <%= form.text_field :query,
+            placeholder: "Search by name, email, or company...",
+            value: params[:query],
+            class: "w-full max-w-md px-3 py-2 border rounded-md text-black dark:text-white dark:bg-gray-800 border-gray-300 dark:border-gray-600" %>
+        <%= form.submit "Search",
+            class: "bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
       </div>
     <% end %>
   </div>
+
 
   <div id="contacts" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
     <% if @contacts.any? %>
@@ -34,7 +39,7 @@
 
             <%= render ButtonComponent.new(text: "Edit", href: edit_contact_path(contact), variant: :secondary) %>
 
-            <%= render ButtonComponent.new(text: "Destroy", href: contact, variant: :danger, type: :button, data: { turbo_confirm: "Are you sure?" }) %>
+    
           </div>
         </div>
       <% end %>

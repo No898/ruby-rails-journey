@@ -1,36 +1,49 @@
+<%# /views/notes/index.html.erb %>
+
 <% content_for :title, "Notes" %>
 
 <div class="w-full">
- <% if notice.present? %>
-  <p
-    id="notice"
-    class="py-2 px-3 mb-5 font-medium rounded-md inline-block
-           bg-green-50 text-green-600
-           dark:bg-green-900 dark:text-green-200"
-  >
-    <%= notice %>
-  </p>
-<% end %>
+  <% if notice.present? %>
+    <%= render NoticeComponent.new(message: notice, type: :success) %>
+  <% end %>
 
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Notes</h1>
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+    <h1 class="text-4xl font-bold text-gray-900 dark:text-white">Notes</h1>
     <%= render ButtonComponent.new(text: "New note", href: new_note_path) %>
   </div>
 
-  <div id="notes" class="min-w-full divide-y divide-gray-200 space-y-5">
-    <% if @notes.any? %>
+  <% if @notes.any? %>
+    <div class="space-y-6">
       <% @notes.each do |note| %>
-        <div class="flex flex-col sm:flex-row justify-between items-center pb-5 sm:pb-0">
-          <%= render note %>
-          <div class="w-full sm:w-auto flex flex-col sm:flex-row space-x-2 space-y-2">
-            <%= render ButtonComponent.new(text: "Show", href: note, variant: :secondary) %>
+        <div class="border-l-4 pl-4 py-4 bg-blue-50 dark:bg-gray-800 border-blue-400 dark:border-blue-600 rounded-md flex flex-col gap-3">
+          <div>
+            <p class="text-gray-800 dark:text-gray-100 text-base"><%= note.content %></p>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+              <%= note.created_at.strftime("%d.%m.%Y %H:%M") %>
+              <% if note.user.present? %>
+                &middot; by <%= note.user.email %>
+              <% end %>
+              <% if note.contact.present? %>
+                &middot; for <%= link_to note.contact.name, contact_path(note.contact), class: "text-blue-600 dark:text-blue-400 hover:underline" %>
+              <% end %>
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-2">
+            <%= render ButtonComponent.new(text: "Show", href: note_path(note), variant: :secondary) %>
             <%= render ButtonComponent.new(text: "Edit", href: edit_note_path(note), variant: :secondary) %>
-            <%= render ButtonComponent.new(text: "Destroy", href: note, variant: :danger, type: :button, data: { turbo_confirm: "Are you sure?" }) %>
+            <%= render ButtonComponent.new(
+              text: "Delete",
+              href: note_path(note),
+              method: :delete,
+              data: { turbo_confirm: "Are you sure?" },
+              variant: :danger
+            ) %>
           </div>
         </div>
       <% end %>
-    <% else %>
-      <p class="text-center my-10">No notes found.</p>
-    <% end %>
-  </div>
+    </div>
+  <% else %>
+    <p class="text-center my-10 text-gray-700 dark:text-gray-300">No notes found.</p>
+  <% end %>
 </div>

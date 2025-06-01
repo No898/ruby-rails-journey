@@ -1,17 +1,25 @@
 class ContactsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :contact_not_found
 
+  # Require authentication for all actions
+  before_action :authenticate_user!, except: %i[index show]
+
+
   before_action :set_contact, only: %i[ show edit update destroy ]
 
-  # GET /contacts or /contacts.json
+# GET /contacts or /contacts.json
   def index
-    if params[:q].present?
-      query = "%#{params[:q]}%"
-      @contacts = Contact.where("LOWER(name) LIKE ? OR LOWER(email) LIKE ? OR LOWER(company) LIKE ?", query.downcase, query.downcase, query.downcase)
+    if params[:query].present?
+      query = "%#{params[:query].downcase}%"
+      @contacts = current_user.contacts.where(
+        "LOWER(name) LIKE :query OR LOWER(email) LIKE :query OR LOWER(company) LIKE :query",
+        query: query
+      ).order(:name)
     else
-      @contacts = Contact.all
+      @contacts = current_user.contacts.order(:name)
     end
   end
+
   # GET /contacts/1 or /contacts/1.json
   def show
     @notes = @contact.notes.order(created_at: :desc)
@@ -21,6 +29,7 @@ class ContactsController < ApplicationController
   # GET /contacts/new
   def new
     @contact = Contact.new
+    @contact.user = current_user
   end
 
   # GET /contacts/1/edit
@@ -30,6 +39,7 @@ class ContactsController < ApplicationController
   # POST /contacts or /contacts.json
   def create
     @contact = Contact.new(contact_params)
+    @contact.user = current_user
 
     respond_to do |format|
       if @contact.save
@@ -68,7 +78,7 @@ class ContactsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_contact
-      @contact = Contact.find(params.expect(:id))
+      @contact = Contact.find(params[:id])
     end
 
     def contact_not_found

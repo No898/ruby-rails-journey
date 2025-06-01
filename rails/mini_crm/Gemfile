@@ -6,6 +6,9 @@ gem "propshaft"
 gem "puma", ">= 5.0"
 gem "sqlite3", ">= 2.1"
 
+# --- Auth ---
+gem "devise"
+
 # --- View & Frontend ---
 gem "importmap-rails"
 gem "turbo-rails"

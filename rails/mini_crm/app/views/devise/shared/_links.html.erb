@@ -1,0 +1,35 @@
+<%# /views/devise/shared/_links.html.erb %>
+<div class="mt-6 space-y-2 text-center text-sm text-gray-700 dark:text-gray-300">
+
+  <% if controller_name != 'sessions' %>
+    <%= render ButtonComponent.new(text: "Log in", href: new_session_path(resource_name), variant: :link) %>
+  <% end %>
+
+  <% if devise_mapping.registerable? && controller_name != 'registrations' %>
+    <%= render ButtonComponent.new(text: "Sign up", href: new_registration_path(resource_name), variant: :link) %>
+  <% end %>
+
+  <% if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+    <%= render ButtonComponent.new(text: "Forgot your password?", href: new_password_path(resource_name), variant: :link) %>
+  <% end %>
+
+  <% if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+    <%= render ButtonComponent.new(text: "Didn't receive confirmation instructions?", href: new_confirmation_path(resource_name), variant: :link) %>
+  <% end %>
+
+  <% if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
+    <%= render ButtonComponent.new(text: "Didn't receive unlock instructions?", href: new_unlock_path(resource_name), variant: :link) %>
+  <% end %>
+
+  <% if devise_mapping.omniauthable? %>
+    <% resource_class.omniauth_providers.each do |provider| %>
+      <%= render ButtonComponent.new(
+            text: "Sign in with #{OmniAuth::Utils.camelize(provider)}",
+            href: omniauth_authorize_path(resource_name, provider),
+            data: { turbo: false },
+            variant: :secondary
+          ) %>
+    <% end %>
+  <% end %>
+
+</div>

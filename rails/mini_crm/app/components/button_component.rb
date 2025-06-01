@@ -1,16 +1,18 @@
 # frozen_string_literal: true
 
 class ButtonComponent < ViewComponent::Base
-  attr_reader :text, :href, :type, :classes, :variant, :data
+  attr_reader :text, :href, :variant, :type, :data, :classes, :method
+  
+  def initialize(text:, href: nil, variant: :primary, type: :link, data: {}, classes: '', method: nil)
+  @text = text
+  @href = href
+  @variant = variant
+  @type = type
+  @data = data
+  @classes = classes
+  @method = method
+end
 
-  def initialize(text:, href: nil, type: 'button', classes: '', variant: :primary, data: {})
-    @text = text
-    @href = href
-    @type = type
-    @classes = classes
-    @variant = variant
-    @data = data
-  end
 
   def base_classes
     common_classes = 'px-3.5 py-2.5 font-bold rounded focus:outline-none focus:shadow-outline align-middle'

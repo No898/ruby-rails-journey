@@ -1,5 +1,9 @@
-<% if @href %>
+<%# /app/components/button_component.html.erb %>
+
+<% if @method.present? %>
+  <%= button_to @text, @href, method: @method, class: "#{base_classes} #{@classes}", data: @data %>
+<% elsif @href %>
   <%= link_to @text, @href, class: "#{base_classes} #{@classes}", type: @type, data: @data %>
 <% else %>
   <%= button_tag @text, class: "#{base_classes} #{@classes}", type: @type, data: @data %>
-<% end %> 
+<% end %>

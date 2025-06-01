@@ -3,8 +3,21 @@
     <strong class="block font-medium mb-1">Content:</strong>
     <%= note.content %>
   </div>
+
   <div>
     <strong class="block font-medium mb-1">Contact:</strong>
-    <%= note.contact_id %>
+    <%= note.contact.present? ? note.contact.name : note.contact_id %>
+  </div>
+
+  <% if note.user.present? %>
+    <div>
+      <strong class="block font-medium mb-1">Created by:</strong>
+      <%= note.user.email %>
+    </div>
+  <% end %>
+
+  <div>
+    <strong class="block font-medium mb-1">Created at:</strong>
+    <%= note.created_at.strftime("%d.%m.%Y %H:%M") %>
   </div>
 </div>

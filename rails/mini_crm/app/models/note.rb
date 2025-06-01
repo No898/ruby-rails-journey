@@ -1,3 +1,5 @@
+# app/models/note.rb
 class Note < ApplicationRecord
+  belongs_to :user
   belongs_to :contact
 end

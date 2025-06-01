@@ -1,0 +1,29 @@
+<%# /views/devise/passwords/new.html.erb %>
+<% content_for :title, "Reset password" %>
+
+<div class="max-w-md w-full mx-auto mt-10 bg-white dark:bg-gray-900 shadow-md dark:shadow-lg rounded-lg p-6 space-y-6">
+  <h1 class="text-2xl font-bold text-gray-800 dark:text-white">Forgot your password?</h1>
+
+  <p class="text-sm text-gray-600 dark:text-gray-400">
+    Enter your email and we’ll send you instructions to reset your password.
+  </p>
+
+  <div class="text-xs text-yellow-700 dark:text-yellow-400 bg-yellow-100 dark:bg-yellow-900 border border-yellow-300 dark:border-yellow-600 rounded p-3">
+    Email sending is disabled in this local test environment.
+  </div>
+
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "space-y-5" }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <div>
+      <%= f.label :email, class: "block font-medium text-sm text-gray-700 dark:text-gray-200" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-blue-500 focus:border-blue-500" %>
+    </div>
+
+    <div>
+      <%= render ButtonComponent.new(text: "Send reset instructions", type: :submit, classes: "w-full") %>
+    </div>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+</div>

@@ -1,29 +1,51 @@
 # 📇 Mini CRM
 
-Mini CRM is a lightweight customer relationship management system built with Ruby on Rails. It's designed to help you manage contacts and notes, with a simple, elegant UI powered by Tailwind CSS.
+Mini CRM is a lightweight customer relationship management system built with Ruby on Rails 8. It's designed to help you manage contacts and notes, with a clean UI powered by Tailwind CSS and full dark mode support.
+
+---
 
 ## ✅ Features Implemented
 
 ### 📁 Contact Management
 - [x] Create, edit, and delete contacts
 - [x] Show individual contact details
-- [x] Basic styling with Tailwind
+- [x] Responsive layout with Tailwind CSS
 
-### 📝 Notes
+### 📝 Notes Management
 - [x] Add notes to contacts
 - [x] Notes listed in descending order
+- [x] Each note tracks author (user) and timestamp
+- [x] Show individual note detail page
+- [x] Edit and delete notes with confirmation
 
-### 🗑 Delete Notes
-- [x] Each note should have a **Delete** button
-- [x] It will call the `destroy` method in the `NotesController`
+### 🔒 Authentication
+- [x] Devise integration for user registration and login
+- [x] Only signed-in users can manage data
+- [x] User info (email + sign out) visible in top right corner
 
-### ✨ UI Components & Theme Support
-- [x] Created reusable `ButtonComponent` and `NoticeComponent`.
-- [x] Implemented light and dark mode support for buttons, notices, and search input field using Tailwind CSS `dark:` variants.
-- [x] Updated theme toggle icon to use common emojis.
+### ✨ UI Components & Theming
+- [x] Reusable `ButtonComponent` with variants (primary, secondary, danger, link)
+- [x] `NoticeComponent` for flash messages (styled success alerts)
+- [x] Dark mode support (based on system preference or toggle)
+- [x] Toggle dark mode with persistent theme in localStorage
+- [x] Responsive design for mobile/tablet/desktop
+- [x] Emoji-based theme toggle icon ☀️🌙
+
+### 🔍 Contact Search
+- [x] Full-text search by name, email, or company
+- [x] Case-insensitive partial match (`ILIKE` in PostgreSQL)
+
+### 💡 UX & Navigation
+- [x] "Mini CRM" top-left link to homepage
+- [x] Welcome landing page with feature list and action buttons
+- [x] Navigation adapts based on authentication state
+- [x] Inline destroy confirmation via `data-turbo-confirm`
 
 ### 🛡 Error Handling
-- [x] Added `ActiveRecord::RecordNotFound` handling in `ContactsController`.
+- [x] Custom `ActiveRecord::RecordNotFound` handling in controllers
+- [x] Inline form error display with Tailwind styling
+
+---
 
 ## 🔧 Setup Instructions
 
@@ -31,37 +53,39 @@ Mini CRM is a lightweight customer relationship management system built with Rub
 bundle install
 bin/rails db:create db:migrate
 gem install foreman --user-install # if not already installed
-bin/dev # Starts Rails + Tailwind
+bin/dev # Starts Rails + Tailwind + Turbo
 ```
 
-Ensure you have Ruby >= 3.2 and Node.js/Yarn installed.
+You’ll need:
+
+- Ruby ≥ 3.2
+- Node.js + Yarn
+- PostgreSQL or SQLite (default)
 
 ---
 
 ## 🛠 Features To Implement
 
-### 🔍 Contact Search
-- [ ] Full-text search by name, email, or company
-- [ ] Partial match using `ILIKE` (PostgreSQL)
-
 ### 🗓 Birthday & Last Contact Date
-- [ ] Add fields `birthday:date` and `last_contacted_at:datetime` to contacts
-- [ ] Automatically update `last_contacted_at` when a note is added
+- [ ] Add `birthday:date` and `last_contacted_at:datetime` to contacts
+- [ ] Auto-update `last_contacted_at` when a note is added
 
 ### 📊 Statistics
-- [ ] Show number of notes per contact
-- [ ] Display the most recent note
-- [ ] Add "Show Active Contacts" button
+- [ ] Count notes per contact
+- [ ] Show most recent note inline
+- [ ] Add “Active Contacts” filter
 
 ### 🖌 Improved Layout
-- [ ] Wrap contacts in **Tailwind cards**
-- [ ] Split layout into columns (sidebar, detail, notes)
-- [ ] Use icons (e.g. Heroicons)
+- [ ] Card-based UI for contact list
+- [ ] Sidebar layout: contacts on left, notes on right
+- [ ] Icons (e.g. Heroicons or Lucide)
 
 ---
 
-### 🧪 Testing
-- [ ] Add system tests for contacts and notes
-- [ ] Validate form submissions and edge cases
+## 🧪 Testing (Planned)
+- [ ] System tests for contacts and notes
+- [ ] Edge case coverage for forms and redirects
 
-Starting with the first feature: **Delete Notes** — we'll implement it step by step. ✅
+---
+
+Mini CRM is ideal for learning modern Rails, Turbo, and Tailwind workflows. Clean, minimal, and extendable.

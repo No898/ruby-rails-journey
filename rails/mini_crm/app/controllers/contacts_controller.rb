@@ -1,4 +1,6 @@
 class ContactsController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :contact_not_found
+
   before_action :set_contact, only: %i[ show edit update destroy ]
 
   # GET /contacts or /contacts.json
@@ -67,6 +69,10 @@ class ContactsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_contact
       @contact = Contact.find(params.expect(:id))
+    end
+
+    def contact_not_found
+      redirect_to contacts_url, alert: "Contact not found."
     end
 
     # Only allow a list of trusted parameters through.

@@ -5,6 +5,10 @@
 
   <%= render "form", contact: @contact %>
 
-  <%= link_to "Show this contact", @contact, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 text-gray-800 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-yellow-300 inline-block font-medium transition-colors duration-200" %>
-  <%= link_to "Back to contacts", contacts_path, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 text-gray-800 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-yellow-300 inline-block font-medium transition-colors duration-200" %>
+  <div class="flex items-center gap-x-4 mt-4">
+    <%= render ButtonComponent.new(text: "Show this contact", href: @contact, variant: :secondary) %>
+
+    <%= render ButtonComponent.new(text: "Back to contacts", href: contacts_path, variant: :secondary) %>
+  </div>
+
 </div>

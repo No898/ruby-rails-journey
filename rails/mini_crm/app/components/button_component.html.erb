@@ -1,0 +1,5 @@
+<% if @href %>
+  <%= link_to @text, @href, class: "#{base_classes} #{@classes}", type: @type, data: @data %>
+<% else %>
+  <%= button_tag @text, class: "#{base_classes} #{@classes}", type: @type, data: @data %>
+<% end %> 

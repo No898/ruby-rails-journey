@@ -17,6 +17,14 @@ Mini CRM is a lightweight customer relationship management system built with Rub
 - [x] Each note should have a **Delete** button
 - [x] It will call the `destroy` method in the `NotesController`
 
+### ✨ UI Components & Theme Support
+- [x] Created reusable `ButtonComponent` and `NoticeComponent`.
+- [x] Implemented light and dark mode support for buttons, notices, and search input field using Tailwind CSS `dark:` variants.
+- [x] Updated theme toggle icon to use common emojis.
+
+### 🛡 Error Handling
+- [x] Added `ActiveRecord::RecordNotFound` handling in `ContactsController`.
+
 ## 🔧 Setup Instructions
 
 ```bash

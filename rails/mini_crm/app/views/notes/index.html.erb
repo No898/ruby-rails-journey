@@ -1,13 +1,20 @@
 <% content_for :title, "Notes" %>
 
 <div class="w-full">
-  <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
-  <% end %>
+ <% if notice.present? %>
+  <p
+    id="notice"
+    class="py-2 px-3 mb-5 font-medium rounded-md inline-block
+           bg-green-50 text-green-600
+           dark:bg-green-900 dark:text-green-200"
+  >
+    <%= notice %>
+  </p>
+<% end %>
 
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl">Notes</h1>
-    <%= link_to "New note", new_note_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
+    <%= render ButtonComponent.new(text: "New note", href: new_note_path) %>
   </div>
 
   <div id="notes" class="min-w-full divide-y divide-gray-200 space-y-5">
@@ -16,9 +23,9 @@
         <div class="flex flex-col sm:flex-row justify-between items-center pb-5 sm:pb-0">
           <%= render note %>
           <div class="w-full sm:w-auto flex flex-col sm:flex-row space-x-2 space-y-2">
-            <%= link_to "Show", note, class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 text-gray-800 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-yellow-300 inline-block font-medium transition-colors duration-200" %>
-            <%= link_to "Edit", edit_note_path(note), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 text-gray-800 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-yellow-300 inline-block font-medium transition-colors duration-200" %>
-            <%= button_to "Destroy", note, method: :delete, class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 dark:bg-red-700 dark:hover:bg-red-800 font-medium cursor-pointer transition-colors duration-200", data: { turbo_confirm: "Are you sure?" } %>
+            <%= render ButtonComponent.new(text: "Show", href: note, variant: :secondary) %>
+            <%= render ButtonComponent.new(text: "Edit", href: edit_note_path(note), variant: :secondary) %>
+            <%= render ButtonComponent.new(text: "Destroy", href: note, variant: :danger, type: :button, data: { turbo_confirm: "Are you sure?" }) %>
           </div>
         </div>
       <% end %>

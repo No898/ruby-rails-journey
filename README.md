@@ -82,6 +82,84 @@ No Bash or extra libraries needed.
 * Ruby installed (any recent version is fine)
 * [Exercism CLI](https://exercism.org/docs/using/cli) installed and authenticated (for `submit` command)
 
+
+
+To keep your Ruby exercises organized and ensure they integrate seamlessly with this repository structure, make sure your Exercism CLI is properly configured.
+
+By default, Exercism downloads exercises into a generic workspace. In this repository, we use the folder:
+
+```
+./exercism/ruby
+```
+
+### ✅ Configuration Steps
+
+Follow these steps to configure Exercism CLI to use the correct folder:
+
+1. Open your terminal
+2. Run the following command:
+
+   ```bash
+   exercism configure --workspace=./exercism
+   ```
+
+3. Now, when downloading Ruby exercises, make sure you're inside the root of this repo:
+
+   ```bash
+   cd path/to/ruby-rails-journey
+   exercism download --track ruby --exercise <exercise-name>
+   ```
+
+### 📌 Result
+
+Ruby exercises will now be saved into:
+
+```
+./exercism/ruby/<exercise-name>
+```
+
+This setup matches the structure used throughout this project and ensures everything stays tidy and consistent.
+
+
+---
+
+## 📁 Folder Setup for Exercism CLI
+
+To keep your Ruby exercises organized and ensure they integrate seamlessly with this repository structure, make sure your Exercism CLI is properly configured.
+
+By default, Exercism downloads exercises into a generic workspace. In this repository, we use the folder:
+
+```
+./exercism/ruby
+```
+
+### ✅ Configuration Steps
+
+Follow these steps to configure Exercism CLI to use the correct folder:
+
+1. Open your terminal
+2. Run the following command:
+
+   ```bash
+   exercism configure --workspace=./exercism
+   ```
+
+3. Now, when downloading Ruby exercises, make sure you're inside the root of this repo:
+
+   ```bash
+   cd path/to/ruby-rails-journey
+   exercism download --track ruby --exercise <exercise-name>
+   ```
+
+### 📌 Result
+
+Ruby exercises will now be saved into:
+
+```
+./exercism/ruby/<exercise-name>
+```
+
+This setup matches the structure used throughout this project and ensures everything stays tidy and consistent.
 ---
 
 ## 🎯 Learning Objectives
@@ -202,6 +280,8 @@ Topic-based notes and study logs, organized by day (`day1.md`, `day2.md`, ...).
   * [x] simple-calculator
   * [x] chess-game
   * [x] luhn
+  * [x] blackjack
+  * [x] eliuds-eggs
 
 (More to come...)
 

@@ -38,3 +38,5 @@
 
 # 🐞 Debug
 .byebug_history
+rails/mini_crm/log/development.log
+rails/mini_crm/app/assets/builds/tailwind.css

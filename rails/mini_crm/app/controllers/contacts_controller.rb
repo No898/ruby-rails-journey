@@ -9,16 +9,22 @@ class ContactsController < ApplicationController
 
 # GET /contacts or /contacts.json
   def index
+    @show_active_only = params[:active] == "1"
+
+    scope = current_user.contacts
+    scope = scope.where(active: true) if @show_active_only
+
     if params[:query].present?
       query = "%#{params[:query].downcase}%"
-      @contacts = current_user.contacts.where(
+      scope = scope.where(
         "LOWER(name) LIKE :query OR LOWER(email) LIKE :query OR LOWER(company) LIKE :query",
         query: query
-      ).order(:name)
-    else
-      @contacts = current_user.contacts.order(:name)
+      )
     end
+
+    @contacts = scope.order(:name)
   end
+
 
   # GET /contacts/1 or /contacts/1.json
   def show
@@ -87,6 +93,6 @@ class ContactsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def contact_params
-      params.require(:contact).permit(:name, :email, :phone, :company, :birthday)
+      params.require(:contact).permit(:name, :email, :phone, :company, :birthday, :active)
     end
 end

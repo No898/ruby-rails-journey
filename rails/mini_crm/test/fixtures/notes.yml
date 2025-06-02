@@ -3,7 +3,9 @@
 one:
   content: MyText
   contact: one
+  user: one
 
 two:
   content: MyText
   contact: two
+  user: two

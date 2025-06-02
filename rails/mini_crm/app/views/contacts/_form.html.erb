@@ -36,6 +36,15 @@
     <%= form.text_field :company, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": contact.errors[:company].none?, "border-red-400 focus:outline-red-600": contact.errors[:company].any?}] %>
   </div>
 
+  <div class="my-5">
+    <div class="flex items-center gap-2">
+      <%= form.check_box :active, id: "contact_active", class: "h-5 w-5 text-blue-600 bg-white border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 cursor-pointer" %>
+      <%= form.label :active, "This contact is active", for: "contact_active", class: "text-gray-800 dark:text-white cursor-pointer" %>
+    </div>
+  </div>
+
+
+
   <div class="inline">
     <%= render ButtonComponent.new(text: form.object.persisted? ? 'Update Contact' : 'Create Contact', type: :submit, classes: "w-full sm:w-auto inline-block cursor-pointer") %>
   </div>

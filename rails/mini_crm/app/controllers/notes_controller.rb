@@ -1,3 +1,5 @@
+# /app/controllers/notes_controller.rb
+
 class NotesController < ApplicationController
   # Ensure user is signed in, except for viewing note list or individual note
   before_action :authenticate_user!, except: %i[index show]
@@ -22,7 +24,8 @@ class NotesController < ApplicationController
   # GET /notes/new
   # Render new note form, preassigning contact_id
   def new
-    @note = Note.new(contact_id: params[:contact_id])
+    @contact = Contact.find(params[:contact_id])
+    @note = @contact.notes.build
   end
 
   # GET /notes/1/edit
@@ -33,18 +36,13 @@ class NotesController < ApplicationController
   # POST /notes
   # Create and save a new note
   def create
-    @note = Note.new(note_params)
-    @note.user = current_user # associate note with the signed-in user
-
+    @contact = Contact.find(params[:contact_id])
+    @note = @contact.notes.build(note_params)
+    @note.user = current_user
+  
     if @note.save
-      # Update the related contact’s last_contacted_at timestamp
-      contact = @note.contact
-      contact.update(last_contacted_at: Time.current)
-
-      redirect_to contact_path(contact), notice: "Note was successfully created."
+      redirect_to contact_path(@contact), notice: "Note was successfully created."
     else
-      # Reload all notes if validation fails to re-render contact detail view
-      @contact = @note.contact
       @notes = @contact.notes.order(created_at: :desc)
       render "contacts/show", status: :unprocessable_entity
     end
@@ -57,7 +55,7 @@ class NotesController < ApplicationController
       redirect_to contact_path(@note.contact), notice: "Note was successfully updated."
     else
       # Reload notes on validation failure to preserve contact view state
-      @contact = @note.contact
+      @contact = @note.contact # This might still be needed here if @note.contact could become nil on update failure
       @notes = @contact.notes.order(created_at: :desc)
       render "contacts/show", status: :unprocessable_entity
     end

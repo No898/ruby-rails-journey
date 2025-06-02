@@ -41,6 +41,15 @@ Mini CRM is a lightweight customer relationship management system built with Rub
 - [x] Navigation adapts based on authentication state
 - [x] Inline destroy confirmation via `data-turbo-confirm`
 
+### 🗓 Birthday & Last Contact Date
+- [x] Add `birthday:date` and `last_contacted_at:datetime` to contacts
+- [x] Auto-update `last_contacted_at` when a note is added
+
+### 📊 Statistics
+- [x] Count notes per contact
+- [x] Show most recent note inline
+- [x] Add “Active Contacts” filter
+
 ### 🛡 Error Handling
 - [x] Custom `ActiveRecord::RecordNotFound` handling in controllers
 - [x] Inline form error display with Tailwind styling
@@ -66,14 +75,7 @@ You’ll need:
 
 ## 🛠 Features To Implement
 
-### 🗓 Birthday & Last Contact Date
-- [ ] Add `birthday:date` and `last_contacted_at:datetime` to contacts
-- [ ] Auto-update `last_contacted_at` when a note is added
 
-### 📊 Statistics
-- [ ] Count notes per contact
-- [ ] Show most recent note inline
-- [ ] Add “Active Contacts” filter
 
 ### 🖌 Improved Layout
 - [ ] Card-based UI for contact list

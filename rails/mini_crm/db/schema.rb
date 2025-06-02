@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_01_202630) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_02_194729) do
   create_table "contacts", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -21,6 +21,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_01_202630) do
     t.date "birthday"
     t.datetime "last_contacted_at"
     t.integer "user_id", null: false
+    t.boolean "active"
     t.index ["user_id"], name: "index_contacts_on_user_id"
   end
 

@@ -10,35 +10,56 @@ def clear_screen
 end
 
 def choose(prompt, options)
-  clear_screen
-  puts prompt
-  options.each_with_index { |opt, i| puts "#{i + 1}) #{opt}" }
-  print "> "
-  idx = gets.to_i - 1
-  options[idx]
+  loop do
+    clear_screen
+    puts prompt
+    puts "0) Back" unless prompt.downcase == "choose action:"
+    options.each_with_index { |opt, i| puts "#{i + 1}) #{opt}" }
+    print "> "
+    input = gets.to_i
+
+    return :back if input == 0 && prompt.downcase != "choose action:"
+    return options[input - 1] if input.between?(1, options.size)
+  end
 end
 
-action = choose("Choose action:", ["test", "submit"])
-selected_folder = choose("Choose folder:", Dir.children(BASE_DIR).select { |f| File.directory?(File.join(BASE_DIR, f)) })
-folder_path = File.join(BASE_DIR, selected_folder)
+loop do
+  action = choose("Choose action:", ["test", "submit"])
+  break if action == :back
 
-if action == "test"
-  files = Dir.glob(File.join(folder_path, "*_test.rb"))
-else
-  files = Dir.glob(File.join(folder_path, "*.rb")) - Dir.glob(File.join(folder_path, "*_test.rb"))
-end
+  loop do
+    selected_folder = choose("Choose folder:", Dir.children(BASE_DIR).select { |f| File.directory?(File.join(BASE_DIR, f)) })
+    break if selected_folder == :back
 
-abort "No matching files." if files.empty?
+    folder_path = File.join(BASE_DIR, selected_folder)
 
-selected_file = choose("Choose file:", files.map { |f| File.basename(f) })
-file_path = File.join(folder_path, selected_file)
+    files = if action == "test"
+      Dir.glob(File.join(folder_path, "*_test.rb"))
+    else
+      Dir.glob(File.join(folder_path, "*.rb")) - Dir.glob(File.join(folder_path, "*_test.rb"))
+    end
 
-if action == "test"
-  clear_screen
-  puts "Running: ruby -r minitest/pride #{file_path}"
-  exec("ruby", "-r", "minitest/pride", file_path)
-else
-  clear_screen
-  puts "Submitting: exercism submit #{file_path}"
-  exec("exercism", "submit", file_path)
+    if files.empty?
+      puts "No matching files. Press Enter to go back."
+      gets
+      next
+    end
+
+    loop do
+      selected_file = choose("Choose file:", files.map { |f| File.basename(f) })
+      break if selected_file == :back
+
+      file_path = File.join(folder_path, selected_file)
+
+      if action == "test"
+        clear_screen
+        puts "Running: ruby -r minitest/pride #{file_path}"
+        exec("ruby", "-r", "minitest/pride", file_path)
+      else
+        clear_screen
+        puts "Submitting: exercism submit #{file_path}"
+        exec("exercism", "submit", file_path)
+      end
+    end
+  end
 end

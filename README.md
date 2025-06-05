@@ -213,16 +213,20 @@ This setup matches the structure used throughout this project and ensures everyt
 * [x] Generators and scaffolding
 * [x] Routing and RESTful resources
 * [x] CRUD with Active Record
-* [ ] Model validations and constraints
+* [x] Model validations and constraints
 * [x] Working with forms (`form_with`, strong params)
 * [x] Custom views, layouts, and partials
 * [x] Flash messages and sessions
-* [ ] Manual user authentication (no Devise)
+* [x] **ViewComponent architecture** for reusable components
+* [x] **Devise authentication** with full authorization
 * [x] Nested resources and associations (`has_many`, `belongs_to`)
 * [x] Database migrations and schema design
-* [ ] Testing basics (Minitest or RSpec)
+* [x] **Comprehensive testing** (Minitest with extensive test suite - 118 tests)
 * [x] Environment configs and secrets
 * [x] Git project structure and .gitignore best practices
+* [x] **Modern frontend** with Turbo + Stimulus + Tailwind CSS
+* [x] **Localization and internationalization** (Czech translation)
+* [x] **Dark mode implementation** with system preference detection
 * [ ] (Optional) Deployment to Render / Fly.io / Railway
 
 ---
@@ -240,7 +244,7 @@ Supports: `add`, `list`, `done`, `remove`, `clear`. Automatically saves changes.
 
 ### `/ruby-cli/ai-terminal`
 
-A simple Ruby terminal chatbot that connects to OpenRouter’s LLM APIs (e.g. Gemini 2.0 Flash, DeepSeek) using HTTP requests and environment variables.  
+A simple Ruby terminal chatbot that connects to OpenRouter's LLM APIs (e.g. Gemini 2.0 Flash, DeepSeek) using HTTP requests and environment variables.  
 Designed to explore how to work with APIs, handle `.env`, and build interactive CLI tools in pure Ruby.
 
 ### `/exercism/ruby`
@@ -249,9 +253,30 @@ All Ruby track exercises from Exercism, solved sequentially with test coverage a
 
 ### `/rails`
 
-Rails applications using MVC structure, built during exploration.  
-Includes a mini CRM with contact management, note-taking, and theme support.  
-ViewComponent is used to create reusable buttons and flash message components.
+Rails applications using MVC structure, built during exploration.
+
+### `/rails/mini_crm`
+
+Advanced **mini CRM application** built on Ruby on Rails 8 with modern architecture and comprehensive functionality:
+
+#### 🎯 **Key Features:**
+- **Complete contact management** with CRUD operations, search, and active status
+- **Advanced notes system** with dual creation (from contacts or standalone) and authorization
+- **ViewComponent architecture** with 4 reusable components (Button, Notice, Avatar, Badge)
+- **Complete Czech localization** including proper grammar and pluralization
+- **Dark mode support** with system preference detection
+- **Professional UI design** with card layouts, avatars, and breadcrumb navigation
+- **Comprehensive test suite** with 118 tests covering all features
+- **Devise authentication** with full authorization and user management
+
+#### 🛠 **Technical Stack:**
+- Ruby on Rails 8 + SQLite
+- Tailwind CSS + ViewComponent + Heroicons
+- Turbo + Stimulus for modern frontend
+- Devise for authentication
+- Minitest with comprehensive testing
+
+This project demonstrates modern Rails development patterns, component-based architecture, professional UI design, and extensive testing coverage.
 
 ### `/notes`
 
@@ -267,12 +292,12 @@ Topic-based notes and study logs, organized by day (`day1.md`, `day2.md`, ...).
   * [x] hello-world
   * [x] lasagna
   * [x] amusement-park (attendee)
-  * [x] amusement-park Improvements
+  * [x] amusement-park-improvements
   * [x] reverse-string
   * [x] log-line-parser
   * [x] assembly-line
   * [x] savings-account
-  * [x] port-of-palermo
+  * [x] port-palermo
   * [x] two-fer
   * [x] acronym
   * [x] isogram
@@ -282,6 +307,8 @@ Topic-based notes and study logs, organized by day (`day1.md`, `day2.md`, ...).
   * [x] luhn
   * [x] blackjack
   * [x] eliuds-eggs
+  * [x] bird-count
+  * [x] bowling
 
 (More to come...)
 

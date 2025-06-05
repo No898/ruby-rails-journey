@@ -1,11 +1,31 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  content: MyText
-  contact: one
+  content: "Úvodní schůzka proběhla velmi dobře. Klient má zájem o naše služby."
   user: one
+  contact: one
+  created_at: <%= 1.week.ago %>
 
 two:
-  content: MyText
-  contact: two
+  content: "Poslal jsem nabídku. Čekáme na odpověď do konce týdne."
+  user: one
+  contact: one
+  created_at: <%= 3.days.ago %>
+
+three:
+  content: "Domluven další meeting na příští pondělí v 10:00."
   user: two
+  contact: two
+  created_at: <%= 1.day.ago %>
+
+four:
+  content: "Projekt dokončen úspěšně. Klient spokojen s výsledky."
+  user: one
+  contact: three
+  created_at: <%= 2.weeks.ago %>
+
+five:
+  content: "Potřeba následný call ohledně nové fáze projektu."
+  user: one
+  contact: three
+  created_at: <%= 1.hour.ago %>

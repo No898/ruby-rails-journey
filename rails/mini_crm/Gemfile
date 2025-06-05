@@ -14,6 +14,7 @@ gem "importmap-rails"
 gem "turbo-rails"
 gem "stimulus-rails"
 gem "view_component"# ✅ ViewComponent pro komponenty
+gem "heroicons-ruby"
 
 # --- Styling ---
 gem "tailwindcss-rails"
@@ -54,4 +55,5 @@ end
 group :test do
   gem "capybara"
   gem "selenium-webdriver"
+  gem "rails-controller-testing"  # For assigns and assert_template in tests
 end

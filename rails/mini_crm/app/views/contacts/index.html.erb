@@ -7,24 +7,24 @@
   <% end %>
 
   <div class="flex justify-between items-center mb-6">
-    <h1 class="font-bold text-4xl text-gray-900 dark:text-white">Contacts</h1>
-    <%= render ButtonComponent.new(text: "New contact", href: new_contact_path) %>
+    <h1 class="font-bold text-4xl text-gray-900 dark:text-white">Kontakty</h1>
+    <%= render ButtonComponent.new(text: "Nový kontakt", href: new_contact_path) %>
   </div>
 
   <%= form_with url: contacts_path, method: :get, local: true do |form| %>
     <div class="flex flex-wrap gap-2 mb-4">
       <%= form.text_field :query,
-          placeholder: "Search by name, email, or company...",
+          placeholder: "Hledat podle jména, emailu nebo firmy...",
           value: params[:query],
           class: "w-full max-w-md px-3 py-2 border rounded-md text-black dark:text-white dark:bg-gray-800 border-gray-300 dark:border-gray-600" %>
-      <%= form.submit "Search",
+      <%= form.submit "Hledat",
           class: "bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
     </div>
   <% end %>
 
   <div class="flex gap-2 mb-6">
-    <%= link_to "All contacts", contacts_path, class: "px-4 py-2 rounded-md font-semibold #{'bg-blue-600 text-white' unless @show_active_only} bg-gray-200 dark:bg-gray-700 dark:text-white" %>
-    <%= link_to "Active only", contacts_path(active: 1), class: "px-4 py-2 rounded-md font-semibold #{'bg-blue-600 text-white' if @show_active_only} bg-gray-200 dark:bg-gray-700 dark:text-white" %>
+    <%= link_to "Všechny kontakty", contacts_path, class: "px-4 py-2 rounded-md font-semibold #{'bg-blue-600 text-white' unless @show_active_only} bg-gray-200 dark:bg-gray-700 dark:text-white" %>
+    <%= link_to "Pouze aktivní", contacts_path(active: 1), class: "px-4 py-2 rounded-md font-semibold #{'bg-blue-600 text-white' if @show_active_only} bg-gray-200 dark:bg-gray-700 dark:text-white" %>
   </div>
 
   <div id="contacts" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -32,36 +32,51 @@
       <% @contacts.each do |contact| %>
         <div class="flex flex-col justify-between h-full p-5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm hover:shadow-md transition">
 
-          <!-- Top row: Name + Active/Inactive badge -->
-          <div class="flex justify-between items-center mb-2">
-            <h2 class="text-xl font-semibold text-gray-900 dark:text-white"><%= contact.name %></h2>
-            <% if contact.active? %>
-              <span class="text-xs font-medium px-2 py-1 bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300 rounded">Active</span>
-            <% else %>
-              <span class="text-xs font-medium px-2 py-1 bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-300 rounded">Inactive</span>
-            <% end %>
+          <!-- Avatar and Name section -->
+          <div class="flex items-center gap-3 mb-4">
+            <%= render AvatarComponent.new(name: contact.name, email: contact.email, size: :lg) %>
+            <div class="flex-1">
+              <div class="flex justify-between items-start">
+                <h2 class="text-xl font-semibold text-gray-900 dark:text-white"><%= contact.name %></h2>
+                <%= render BadgeComponent.new(
+                  text: contact.active? ? "Active" : "Inactive",
+                  variant: contact.active? ? :success : :secondary,
+                  size: :sm
+                ) %>
+              </div>
+            </div>
           </div>
 
           <!-- Rendered contact partial -->
           <%= render contact %>
 
           <!-- Note statistics -->
-          <div class="text-sm text-gray-600 dark:text-gray-300 mt-2">
-            <p><strong>Notes:</strong> <%= contact.notes.count %></p>
+          <div class="text-sm text-gray-600 dark:text-gray-300 mt-4 space-y-2">
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+              <span><%= contact.notes.count %> <%= contact.notes.count == 1 ? 'poznámka' : contact.notes.count.between?(2, 4) ? 'poznámky' : 'poznámek' %></span>
+            </div>
             <% if contact.notes.any? %>
-              <p><strong>Last note:</strong> <%= truncate(contact.notes.order(created_at: :desc).first.content, length: 100) %></p>
+              <div class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-gray-500 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <p class="text-xs leading-relaxed"><%= truncate(contact.notes.order(created_at: :desc).first.content, length: 80) %></p>
+              </div>
             <% end %>
           </div>
 
           <!-- Action buttons -->
           <div class="mt-4 flex flex-col sm:flex-row gap-2">
-            <%= render ButtonComponent.new(text: "Show", href: contact, variant: :secondary) %>
-            <%= render ButtonComponent.new(text: "Edit", href: edit_contact_path(contact), variant: :secondary) %>
+            <%= render ButtonComponent.new(text: "Zobrazit", href: contact, variant: :secondary) %>
+            <%= render ButtonComponent.new(text: "Upravit", href: edit_contact_path(contact), variant: :secondary) %>
           </div>
         </div>
       <% end %>
     <% else %>
-      <p class="text-center my-10 text-gray-700 dark:text-gray-300">No contacts found.</p>
+      <p class="text-center my-10 text-gray-700 dark:text-gray-300">Žádné kontakty nenalezeny.</p>
     <% end %>
   </div>
 </div>

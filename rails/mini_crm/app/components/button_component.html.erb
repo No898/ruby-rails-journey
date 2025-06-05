@@ -1,9 +1,38 @@
 <%# /app/components/button_component.html.erb %>
 
+<% content_to_show = content.present? ? content : @text %>
+
 <% if @method.present? %>
-  <%= button_to @text, @href, method: @method, class: "#{base_classes} #{@classes}", data: @data %>
+  <%
+    button_options = { method: @method, class: base_classes, data: @data }
+    button_options[:disabled] = @disabled if @disabled
+    button_options[:'aria-disabled'] = 'true' if @disabled
+  %>
+  <%= button_to @href, button_options do %>
+    <%= content_to_show %>
+  <% end %>
+<% elsif @type == :submit %>
+  <%
+    submit_options = { type: "submit", class: base_classes, data: @data }
+    submit_options[:disabled] = @disabled if @disabled
+    submit_options[:'aria-disabled'] = 'true' if @disabled
+  %>
+  <%= button_tag content_to_show, submit_options %>
 <% elsif @href %>
-  <%= link_to @text, @href, class: "#{base_classes} #{@classes}", type: @type, data: @data %>
+  <% 
+    link_options = { class: base_classes, data: @data }
+    link_options[:target] = @target if @target.present?
+    link_options[:'aria-disabled'] = 'true' if @disabled
+    link_options[:tabindex] = '-1' if @disabled
+  %>
+  <%= link_to @href, link_options do %>
+    <%= content_to_show %>
+  <% end %>
 <% else %>
-  <%= button_tag @text, class: "#{base_classes} #{@classes}", type: @type, data: @data %>
+  <%
+    button_options = { class: base_classes, type: @type, data: @data }
+    button_options[:disabled] = @disabled if @disabled
+    button_options[:'aria-disabled'] = 'true' if @disabled
+  %>
+  <%= button_tag content_to_show, button_options %>
 <% end %>

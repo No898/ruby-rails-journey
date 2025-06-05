@@ -1,31 +1,122 @@
-<%= form_with(model: [@contact, note], class: "contents") do |form| %>
+<%= form_with(model: @contact.present? ? [@contact, note] : note, class: "space-y-6") do |form| %>
 
-<%= form.hidden_field :contact_id, value: note.contact_id || @contact&.id %>
-
-<% if defined?(@contact) && @contact&.last_contacted_at.present? %>
-  <p class="text-sm text-gray-500 mb-4">
-    Last contacted: <%= l(@contact.last_contacted_at, format: :long) %>
-  </p>
-<% end %>
-
-  <% if note.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
-      <h2><%= pluralize(note.errors.count, "error") %> prohibited this note from being saved:</h2>
-
-      <ul class="list-disc ml-6">
-        <% note.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+  <%= form.hidden_field :contact_id, value: note.contact_id || @contact&.id %>
+  
+  <!-- Contact selection (only when not assigned to specific contact) -->
+  <% if @contact.blank? && defined?(@contacts) && @contacts.present? %>
+    <div class="space-y-2">
+      <%= form.label :contact_id, "Kontakt", class: "block text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2" do %>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+        </svg>
+        Kontakt
+      <% end %>
+      
+      <%= form.collection_select :contact_id, @contacts, :id, 
+          ->(contact) { contact.name + (contact.company.present? ? " (#{contact.company})" : "") },
+          { prompt: "Vyberte kontakt..." },
+          { 
+            class: [
+              "block w-full px-3 py-2 border rounded-lg shadow-sm transition-colors",
+              "focus:ring-2 focus:ring-blue-500 focus:border-blue-500",
+              "dark:bg-gray-700 dark:text-white",
+              note.errors[:contact_id].none? ? 
+                "border-gray-300 dark:border-gray-600" : 
+                "border-red-300 dark:border-red-600 focus:ring-red-500 focus:border-red-500"
+            ]
+          } %>
+      
+      <% if note.errors[:contact_id].any? %>
+        <p class="text-sm text-red-600 dark:text-red-400 flex items-center gap-1">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <%= note.errors[:contact_id].first %>
+        </p>
+      <% end %>
     </div>
   <% end %>
 
-  <div class="my-5">
-    <%= form.label :content %>
-    <%= form.text_area :content, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": note.errors[:content].none?, "border-red-400 focus:outline-red-600": note.errors[:content].any?}] %>
+  <!-- Last contacted info -->
+  <% if defined?(@contact) && @contact&.last_contacted_at.present? %>
+    <div class="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+      <div class="flex items-center gap-2 text-sm text-blue-800 dark:text-blue-300">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <span>Poslední kontakt: <%= l(@contact.last_contacted_at, format: :long) %></span>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- Error messages -->
+  <% if note.errors.any? %>
+    <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
+      <div class="flex items-start gap-3">
+        <svg class="w-5 h-5 text-red-600 dark:text-red-400 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <div>
+          <h3 class="text-red-800 dark:text-red-200 font-medium mb-2">
+            <%= pluralize(note.errors.count, "chyba", "chyby", "chyb") %> zabránila uložení poznámky:
+          </h3>
+          <ul class="text-red-700 dark:text-red-300 text-sm space-y-1">
+            <% note.errors.each do |error| %>
+              <li class="flex items-center gap-2">
+                <span class="w-1 h-1 bg-red-500 rounded-full"></span>
+                <%= error.full_message %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- Content field -->
+  <div class="space-y-2">
+    <%= form.label :content, "Obsah poznámky", class: "block text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2" do %>
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+      </svg>
+      Obsah poznámky
+    <% end %>
+    
+    <%= form.text_area :content, 
+        rows: 6, 
+        placeholder: "Napište poznámku o tomto kontaktu...",
+        class: [
+          "block w-full px-3 py-2 border rounded-lg shadow-sm transition-colors",
+          "focus:ring-2 focus:ring-blue-500 focus:border-blue-500",
+          "dark:bg-gray-700 dark:text-white dark:placeholder-gray-400",
+          note.errors[:content].none? ? 
+            "border-gray-300 dark:border-gray-600" : 
+            "border-red-300 dark:border-red-600 focus:ring-red-500 focus:border-red-500"
+        ] %>
+    
+    <% if note.errors[:content].any? %>
+      <p class="text-sm text-red-600 dark:text-red-400 flex items-center gap-1">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <%= note.errors[:content].first %>
+      </p>
+    <% end %>
   </div>
 
-  <div class="inline">
-    <%= render ButtonComponent.new(text: form.object.persisted? ? 'Update Note' : 'Create Note', type: :submit, classes: "w-full sm:w-auto inline-block cursor-pointer") %>
+  <!-- Submit button -->
+  <div class="flex items-center gap-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+    <%= render ButtonComponent.new(
+      text: form.object.persisted? ? 'Uložit změny' : 'Vytvořit poznámku', 
+      type: :submit, 
+      classes: "flex items-center gap-2"
+    ) %>
+    
+    <% if form.object.persisted? %>
+      <%= link_to contact_path(@note.contact), class: "text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 text-sm" do %>
+        Zrušit
+      <% end %>
+    <% end %>
   </div>
+
 <% end %>

@@ -1,9 +1,25 @@
-<% content_for :title, "New contact" %>
+<% content_for :title, "Nový kontakt" %>
 
-<div class="md:w-2/3 w-full">
-  <h1 class="font-bold text-4xl">New contact</h1>
+<div class="w-full max-w-2xl mx-auto">
+  
+  <!-- Header -->
+  <div class="mb-6">
+    <h1 class="font-bold text-4xl text-gray-900 dark:text-white flex items-center gap-3">
+      <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+      </svg>
+      Nový kontakt
+    </h1>
+    <p class="text-gray-600 dark:text-gray-400 mt-2">Vyplňte základní informace o novém kontaktu</p>
+  </div>
 
-  <%= render "form", contact: @contact %>
+  <!-- Form Card -->
+  <div class="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
+    <%= render "form", contact: @contact %>
+  </div>
 
-  <%= render ButtonComponent.new(text: "Back to contacts", href: contacts_path, variant: :secondary, classes: "mt-2 sm:mt-0 sm:ml-2") %>
+  <!-- Navigation -->
+  <div class="mt-4 text-center">
+    <%= render ButtonComponent.new(text: "Zpět na kontakty", href: contacts_path, variant: :secondary) %>
+  </div>
 </div>

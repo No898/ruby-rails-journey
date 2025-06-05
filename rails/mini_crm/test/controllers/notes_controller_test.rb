@@ -3,6 +3,8 @@ require "test_helper"
 class NotesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @note = notes(:one)
+    @user = users(:one)
+    sign_in @user
   end
 
   test "should get index" do
@@ -17,10 +19,10 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create note" do
     assert_difference("Note.count") do
-      post notes_url, params: { note: { contact_id: @note.contact_id, content: @note.content } }
+      post notes_url, params: { note: { contact_id: @note.contact_id, content: "New test note content" } }
     end
 
-    assert_redirected_to note_url(Note.last)
+    assert_redirected_to note_url(Note.first)  # first because of desc order
   end
 
   test "should show note" do
@@ -44,5 +46,16 @@ class NotesControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to notes_url
+  end
+
+  private
+
+  def sign_in(user)
+    post user_session_path, params: {
+      user: {
+        email: user.email,
+        password: "password"
+      }
+    }
   end
 end

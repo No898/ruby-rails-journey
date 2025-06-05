@@ -1,0 +1,81 @@
+#!/usr/bin/env ruby
+
+puts "🧪 Spouštím kompletní test suite pro Mini CRM"
+puts "=" * 50
+
+# Change to the right directory
+require "pathname"
+ENV["BUNDLE_GEMFILE"] ||= File.expand_path("../Gemfile", __dir__)
+
+require "bundler/setup" # Set up gems listed in the Gemfile.
+
+# Set test environment
+ENV["RAILS_ENV"] = "test"
+
+def run_test_command(name, command)
+  puts "\n🔍 #{name}"
+  puts "-" * 30
+  
+  start_time = Time.now
+  success = system(command)
+  end_time = Time.now
+  
+  duration = (end_time - start_time).round(2)
+  
+  if success
+    puts "✅ #{name} - dokončeno za #{duration}s"
+  else
+    puts "❌ #{name} - SELHALO za #{duration}s"
+  end
+  
+  success
+end
+
+# Track overall results
+results = {}
+
+# Prepare test database
+puts "\n🏗️  Příprava test databáze..."
+system("bin/rails db:test:prepare")
+
+# Run different test suites
+results[:models] = run_test_command(
+  "Model testy", 
+  "bin/rails test test/models/"
+)
+
+results[:controllers] = run_test_command(
+  "Controller testy", 
+  "bin/rails test test/controllers/"
+)
+
+results[:components] = run_test_command(
+  "Component testy", 
+  "bin/rails test test/components/"
+)
+
+results[:system] = run_test_command(
+  "System testy (E2E)", 
+  "bin/rails test:system"
+)
+
+# Summary
+puts "\n" + "=" * 50
+puts "📊 SOUHRN TESTŮ"
+puts "=" * 50
+
+all_passed = true
+results.each do |test_type, passed|
+  status = passed ? "✅ PROŠLY" : "❌ SELHALY"
+  puts "#{test_type.to_s.capitalize.ljust(15)} #{status}"
+  all_passed = false unless passed
+end
+
+puts "\n🎯 CELKOVÝ VÝSLEDEK: #{all_passed ? '✅ VŠECHNY TESTY PROŠLY' : '❌ NĚKTERÉ TESTY SELHALY'}"
+
+if all_passed
+  puts "\n🎉 Skvělá práce! Aplikace je plně otestována a funkční."
+else
+  puts "\n🔧 Zkontrolujte selhavší testy a opravte problémy."
+  exit 1
+end 

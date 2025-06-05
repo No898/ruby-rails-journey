@@ -1,0 +1,7 @@
+<div class="<%= size_classes %> rounded-full overflow-hidden flex items-center justify-center <%= background_color if avatar_url.blank? %>">
+  <% if avatar_url.present? %>
+    <img src="<%= avatar_url %>" alt="<%= name %>" class="w-full h-full object-cover">
+  <% else %>
+    <span class="font-semibold text-white"><%= initials %></span>
+  <% end %>
+</div> 

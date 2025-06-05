@@ -3,10 +3,10 @@ Rails.application.routes.draw do
   get "home/index"
   devise_for :users
   resources :contacts do
-    resources :notes, only: [:new, :create]
+    resources :notes, only: [:create]
   end
   
-  resources :notes, except: [:new, :create]
+  resources :notes
   resources :posts
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

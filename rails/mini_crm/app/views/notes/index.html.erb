@@ -1,49 +1,104 @@
-<%# /views/notes/index.html.erb %>
-
-<% content_for :title, "Notes" %>
+<% content_for :title, "Poznámky" %>
 
 <div class="w-full">
   <% if notice.present? %>
     <%= render NoticeComponent.new(message: notice, type: :success) %>
   <% end %>
 
-  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-    <h1 class="text-4xl font-bold text-gray-900 dark:text-white">Notes</h1>
-    
+  <!-- Header with breadcrumb -->
+  <div class="mb-6">
+    <nav class="flex mb-4" aria-label="Breadcrumb">
+      <ol class="inline-flex items-center space-x-1 md:space-x-3">
+        <li class="inline-flex items-center">
+          <%= link_to contacts_path, class: "inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white" do %>
+            <svg class="w-3 h-3 me-2.5" fill="currentColor" viewBox="0 0 20 20">
+              <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
+            </svg>
+            Kontakty
+          <% end %>
+        </li>
+        <li aria-current="page">
+          <div class="flex items-center">
+            <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" fill="none" viewBox="0 0 6 10">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+            </svg>
+            <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">Poznámky</span>
+          </div>
+        </li>
+      </ol>
+    </nav>
+
+    <div class="flex justify-between items-center">
+      <h1 class="text-4xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
+        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+        </svg>
+        Poznámky
+      </h1>
+      <%= render ButtonComponent.new(text: "Nová poznámka", href: new_note_path, variant: :primary) %>
+    </div>
   </div>
 
   <% if @notes.any? %>
-    <div class="space-y-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <% @notes.each do |note| %>
-        <div class="border-l-4 pl-4 py-4 bg-blue-50 dark:bg-gray-800 border-blue-400 dark:border-blue-600 rounded-md flex flex-col gap-3">
-          <div>
-            <p class="text-gray-800 dark:text-gray-100 text-base"><%= note.content %></p>
-            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
-              <%= note.created_at.strftime("%d.%m.%Y %H:%M") %>
-              <% if note.user.present? %>
-                &middot; by <%= note.user.email %>
-              <% end %>
-              <% if note.contact.present? %>
-                &middot; for <%= link_to note.contact.name, contact_path(note.contact), class: "text-blue-600 dark:text-blue-400 hover:underline" %>
-              <% end %>
-            </p>
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition">
+          
+          <!-- Contact info -->
+          <% if note.contact.present? %>
+            <div class="flex items-center gap-3 mb-4 pb-3 border-b border-gray-200 dark:border-gray-700">
+              <%= render AvatarComponent.new(name: note.contact.name, email: note.contact.email, size: :sm) %>
+              <div>
+                <%= link_to note.contact.name, contact_path(note.contact), class: "font-medium text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400" %>
+                <%= render BadgeComponent.new(
+                  text: note.contact.active? ? "Aktivní" : "Neaktivní",
+                  variant: note.contact.active? ? :success : :secondary,
+                  size: :sm
+                ) %>
+              </div>
+            </div>
+          <% end %>
+
+          <!-- Note content -->
+          <div class="mb-4">
+            <p class="text-gray-800 dark:text-gray-100 leading-relaxed"><%= truncate(note.content, length: 200) %></p>
           </div>
 
-          <div class="flex flex-wrap gap-2">
-            <%= render ButtonComponent.new(text: "Show", href: note_path(note), variant: :secondary) %>
-            <%= render ButtonComponent.new(text: "Edit", href: edit_note_path(note), variant: :secondary) %>
+          <!-- Metadata -->
+          <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-4">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span><%= note.created_at.strftime("%d.%m.%Y %H:%M") %></span>
+            <% if note.user.present? %>
+              <span>&middot; <%= note.user.email %></span>
+            <% end %>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex gap-2">
+            <%= render ButtonComponent.new(text: "Zobrazit", href: note_path(note), variant: :secondary, classes: "text-sm") %>
+            <%= render ButtonComponent.new(text: "Upravit", href: edit_note_path(note), variant: :secondary, classes: "text-sm") %>
             <%= render ButtonComponent.new(
-              text: "Delete",
+              text: "Smazat",
               href: note_path(note),
               method: :delete,
-              data: { turbo_confirm: "Are you sure?" },
-              variant: :danger
+              data: { turbo_confirm: "Opravdu smazat tuto poznámku?" },
+              variant: :danger,
+              classes: "text-sm"
             ) %>
           </div>
         </div>
       <% end %>
     </div>
   <% else %>
-    <p class="text-center my-10 text-gray-700 dark:text-gray-300">No notes found.</p>
+    <div class="text-center py-16">
+      <svg class="w-16 h-16 mx-auto mb-4 text-gray-400 dark:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+      </svg>
+      <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">Žádné poznámky</h3>
+      <p class="text-gray-500 dark:text-gray-400 mb-4">Zatím nemáte žádné poznámky. Vytvořte první poznámku.</p>
+      <%= render ButtonComponent.new(text: "Vytvořit poznámku", href: new_note_path, variant: :primary) %>
+    </div>
   <% end %>
 </div>

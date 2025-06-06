@@ -28,7 +28,7 @@ loop do
   break if action == :back
 
   loop do
-    selected_folder = choose("Choose folder:", Dir.children(BASE_DIR).select { |f| File.directory?(File.join(BASE_DIR, f)) })
+    selected_folder = choose("Choose folder:", Dir.children(BASE_DIR).select { |f| File.directory?(File.join(BASE_DIR, f)) }.sort)
     break if selected_folder == :back
 
     folder_path = File.join(BASE_DIR, selected_folder)

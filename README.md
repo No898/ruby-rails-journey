@@ -5,6 +5,14 @@ My goal is to gain a solid understanding of both the language and the framework 
 
 I treat this as a **public playground**, portfolio piece, and study log — everything I learn is tracked here.
 
+## 🆕 New Focus: GoRails
+
+As of **Day 11**, I’ve decided to shift a significant part of my daily practice from Exercism to [GoRails](https://gorails.com/) — a professional learning platform focused on practical Rails development.
+
+GoRails includes screencasts, real-world Rails patterns, API tutorials, background jobs, Turbo/Hotwire usage, and more. It aligns closely with my goals of mastering full-stack Rails development.
+
+A new folder `/gorails` contains notes, exercises, and mini-projects based on GoRails content.
+
 ---
 
 ## ⚙️ Project CLI Helper (`exe.rb`)
@@ -185,9 +193,9 @@ This setup matches the structure used throughout this project and ensures everyt
 * [x] Classes and objects, constructors (`initialize`), `self`
 * [x] `attr_accessor`, `attr_reader`, `attr_writer`
 * [x] Inheritance (`<`) and calling `super`
-* [ ] Modules: `module`, `include`, `extend`
-* [ ] Method introspection: `respond_to?`, `send`, `method_missing`
-* [ ] `yield`, `block_given?`, `Proc`, `lambda`, closures
+* [x] Modules: `module`, `include`, `extend`
+* [x] Method introspection: `respond_to?`, `send`, `method_missing`
+* [x] `yield`, `block_given?`, `Proc`, `lambda`, closures
 * [x] Enumerable module: `map`, `select`, `reject`, `reduce`, etc.
 * [x] Symbols vs Strings — performance and semantics
 * [x] Time and Date classes: `Time.now`, `Date.today`
@@ -197,8 +205,8 @@ This setup matches the structure used throughout this project and ensures everyt
 #### 🧪 3. Practical Extras
 
 * [x] Gemfile & Bundler: `bundle init`, `bundle install`, `bundle exec`
-* [ ] Debugging: `puts`, `p`, `irb`, `pry`, `byebug`
-* [ ] Testing: `Minitest` basics (optionally `RSpec`)
+* [x] Debugging: `puts`, `p`, `irb`, `pry`, `byebug`
+* [x] Testing: `Minitest` basics (optionally `RSpec`)
 * [x] CLI scripting: `ARGV`, `OptionParser`
 * [x] Using environment variables: `ENV['SOME_KEY']`
 * [ ] Documentation tools: `ri`, `yard`, [rubydoc.info](https://rubydoc.info)
@@ -246,6 +254,13 @@ Supports: `add`, `list`, `done`, `remove`, `clear`. Automatically saves changes.
 
 A simple Ruby terminal chatbot that connects to OpenRouter's LLM APIs (e.g. Gemini 2.0 Flash, DeepSeek) using HTTP requests and environment variables.  
 Designed to explore how to work with APIs, handle `.env`, and build interactive CLI tools in pure Ruby.
+
+### `/gorails`
+
+📚 **NEW!** GoRails-based practice zone.
+
+Contains solutions, notes, and code snippets based on the [GoRails](https://gorails.com/) screencasts and tutorials.
+Structured to reflect real-world usage of Rails with topics such as background jobs, authentication, APIs, Hotwire, etc.
 
 ### `/exercism/ruby`
 
@@ -308,9 +323,13 @@ Topic-based notes and study logs, organized by day (`day1.md`, `day2.md`, ...).
   * [x] blackjack
   * [x] eliuds-eggs
   * [x] bird-count
-  * [x] bowling
+  * [x] boutique-inventory
+  * [x] boutique-inventory-improvements
+  * [x] raindrops
+  * [x] twelve-days
+  * [!] bowling
 
-(More to come...)
+
 
 ---
 

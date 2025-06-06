@@ -1,6 +1,6 @@
 # ✅ Day 2 – Exercism Ruby Practice
 
-**Date:** 27 May 2025
+**Date:** 28 May 2025
 **Platform:** [https://exercism.org/tracks/ruby](https://exercism.org/tracks/ruby)
 
 ---

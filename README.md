@@ -331,6 +331,7 @@ Topic-based notes and study logs, organized by day (`day1.md`, `day2.md`, ...).
 * [Ruby on Rails Official channel](https://www.youtube.com/watch?v=X_Hw9P1iZfQ)
 * [Ruby on Rails Guides](https://guides.rubyonrails.org/)
 * [Rails Girls Guides](https://guides.railsgirls.com/)
+* [RoR Guides and learning path](https://gorails.com/)
 
 ---
 

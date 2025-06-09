@@ -8,6 +8,9 @@ class Contact < ApplicationRecord
     validates :phone, format: { with: /\A[\+]?[\d\s\-\(\)]+\z/ }, allow_blank: true
     validates :birthday, comparison: { less_than_or_equal_to: Date.current }, allow_blank: true
 
+    # Default scope to ensure we only get current user's contacts
+    default_scope { where(user: User.current) if User.current }
+
     scope :search, ->(query) {
       where("LOWER(name) LIKE :query OR LOWER(email) LIKE :query OR LOWER(company) LIKE :query", 
             query: "%#{query.downcase}%")

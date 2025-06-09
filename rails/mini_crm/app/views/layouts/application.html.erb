@@ -14,6 +14,10 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+
+    <%# This manual script should be replaced with a Stimulus controller for consistency %>
+    <%# <script> ... </script> %>
     <script>
       (function() {
         const savedTheme = localStorage.getItem("theme");
@@ -52,13 +56,10 @@
 
 <body>
   <div class="bg-white text-black dark:bg-gray-900 dark:text-white transition-colors duration-300 min-h-screen pt-[2vh] p-[1vh] lg:p-[5vh]">
-
-
-
-  <!-- Dark mode toggle -->
+    <%# Dark mode toggle %>
     <button
       id="toggle-dark"
-      class="absolute bottom-4 right-4 z-50 p-2 rounded-full
+      class="fixed bottom-4 right-4 z-50 p-2 rounded-full
              bg-gray-200 text-gray-800 shadow
              hover:bg-gray-300 hover:text-black
              dark:bg-gray-700 dark:text-yellow-300 dark:shadow-lg
@@ -69,39 +70,34 @@
       <span id="theme-icon"></span>
     </button>
   
+    <main class="container mx-auto px-5">
+      <div class="flex-1">
+        <%= yield %>
+      </div>
 
-<main class="container mx-auto px-5">
-  <div class="flex-1">
-    <%= yield %>
+      <%# Top left: App name %>
+      <div class="absolute top-4 left-4 z-50">
+        <%= link_to "Mini CRM", root_path,
+          class: "font-bold text-gray-900 dark:text-white text-2xl hover:underline" %>
+      </div>
+
+      <%# User bar top right %>
+      <% if user_signed_in? %>
+        <div class="absolute top-4 right-4 text-sm text-gray-800 dark:text-gray-200 flex items-center gap-3 z-50">
+          <span><%= current_user.email %></span>
+          <%= button_to "Sign out", destroy_user_session_path, method: :delete,
+              class: "text-red-600 dark:text-red-400 hover:underline bg-transparent text-sm"
+            %>
+        </div>
+      <% else %>
+        <div class="absolute top-4 right-4 z-50">
+          <span class="text-gray-800 dark:text-gray-200">
+            You are not logged in
+          </span>
+        </div>
+      <% end %>
+    </main>
   </div>
-
-  <%# Top left: App name %>
-  <div class="absolute top-4 left-4 z-50">
-    <%= link_to "Mini CRM", root_path,
-      class: "font-bold text-gray-900 dark:text-white text-2xl hover:underline" %>
-  </div>
-
-
-  <%# User bar top right %>
-  <% if user_signed_in? %>
-    <div class="absolute top-4 right-4 text-sm text-gray-800 dark:text-gray-200 flex items-center gap-3 z-50">
-      <span><%= current_user.email %></span>
-      <%= button_to "Sign out", destroy_user_session_path, method: :delete,
-          class: "text-red-600 dark:text-red-400 hover:underline bg-transparent text-sm"
-        %>
-    </div>
-  <% else %>
-    <div class="absolute top-4 right-4 z-50">
-      <span class="text-gray-800 dark:text-gray-200">
-        You are not logged in
-      </span>
-    </div>
-  <% end %>
-
-</main>
-
-  </div>
-
 </body>
 
 </html>

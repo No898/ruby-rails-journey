@@ -1,0 +1,15 @@
+<%# Chat Messages %>
+<div id="chat_messages" class="space-y-4">
+  <% if @message.present? %>
+    <div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-4">
+      <p class="text-gray-600 dark:text-gray-400 font-semibold">You:</p>
+      <p class="text-gray-800 dark:text-gray-200"><%= @message %></p>
+    </div>
+    <div class="bg-blue-50 dark:bg-gray-700 rounded-lg p-4">
+      <p class="text-gray-600 dark:text-gray-400 font-semibold">AI:</p>
+      <p class="text-gray-800 dark:text-gray-200"><%= @answer %></p>
+    </div>
+  <% else %>
+    <p class="text-gray-500 dark:text-gray-400 text-center py-4">Ask me anything about your CRM!</p>
+  <% end %>
+</div> 

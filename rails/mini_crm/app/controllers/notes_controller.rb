@@ -8,12 +8,12 @@ class NotesController < ApplicationController
   before_action :set_note, only: %i[show edit update destroy]
 
   # Ensure only the owner of the note can edit or delete it
-  before_action :authorize_note_owner!, only: %i[edit update destroy]
+  before_action :authorize_note_owner!, only: %i[edit update destroy show]
 
   # GET /notes
   # Show all notes (optional feature, could be scoped later)
   def index
-    @notes = Note.all
+    @notes = current_user.notes.includes(:contact).order(created_at: :desc)
   end
 
   # GET /notes/1
@@ -25,11 +25,11 @@ class NotesController < ApplicationController
   # Render new note form, optionally preassigning contact_id
   def new
     if params[:contact_id].present?
-      @contact = Contact.find(params[:contact_id])
+      @contact = current_user.contacts.find(params[:contact_id])
       @note = @contact.notes.build
     else
       @note = Note.new
-      @contacts = Contact.all.order(:name)
+      @contacts = current_user.contacts.order(:name)
     end
   end
 
@@ -43,7 +43,7 @@ class NotesController < ApplicationController
   def create
     if params[:contact_id].present?
       # Creating note from contact page
-      @contact = Contact.find(params[:contact_id])
+      @contact = current_user.contacts.find(params[:contact_id])
       @note = @contact.notes.build(note_params)
       @note.user = current_user
     
@@ -61,7 +61,7 @@ class NotesController < ApplicationController
       if @note.save
         redirect_to note_path(@note), notice: "Note was successfully created."
       else
-        @contacts = Contact.all.order(:name)
+        @contacts = current_user.contacts.order(:name)
         render :new, status: :unprocessable_entity
       end
     end
@@ -86,15 +86,17 @@ class NotesController < ApplicationController
 
   private
 
-    # Find note by ID
+    # Find note by ID and ensure it belongs to current user
     def set_note
-      @note = Note.find(params[:id])
+      @note = current_user.notes.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to notes_path, alert: "Note not found or you don't have permission to access it."
     end
 
     # Only allow note owners to edit or delete
     def authorize_note_owner!
       unless @note.user == current_user
-        redirect_to contact_path(@note.contact), alert: "You are not allowed to perform this action."
+        redirect_to notes_path, alert: "You are not allowed to perform this action."
       end
     end
 

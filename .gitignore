@@ -26,6 +26,7 @@
 !/rails/mini_crm/storage/.keep
 /rails/mini_crm/node_modules/
 /rails/mini_crm/public/assets/
+/rails/mini_crm/public/assets/*
 /rails/mini_crm/public/packs/
 /rails/mini_crm/Gemfile.lock
 

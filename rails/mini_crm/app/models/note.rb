@@ -9,7 +9,14 @@ class Note < ApplicationRecord
   before_save :strip_content
   after_create :update_contact_last_contacted_at
 
-  default_scope { order(created_at: :desc) }
+  # Default scope to ensure we only get current user's notes and order by creation date
+  default_scope { 
+    if User.current
+      where(user: User.current).order(created_at: :desc)
+    else
+      order(created_at: :desc)
+    end
+  }
 
   def content_preview(length = 100)
     content.length > length ? "#{content[0...length]}..." : content
